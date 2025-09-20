@@ -43,6 +43,7 @@ const (
 	PROJ_NameInput  = 51
 	PROJ_NewProject = 52
 	PROJ_OpenWDBtn  = 53
+	PROJ_LaunchS349 = 54
 
 	ProgTitle = "videos349: a simple video editor for teachers"
 )

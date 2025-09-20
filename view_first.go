@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"os"
+	"os/exec"
 	"path/filepath"
 
 	g143 "github.com/bankole7782/graphics143"
@@ -26,7 +27,9 @@ func drawFirstView(window *glfw.Window) {
 	pnBtnX, pnBtnY := nextHorizontalCoords(pnIRect, 30)
 	nPRS := theCtx.drawButtonA(PROJ_NewProject, pnBtnX, pnBtnY, "New Project", fontColor, "#B3AE97")
 	oWDBX, _ := nextHorizontalCoords(nPRS, 40)
-	theCtx.drawButtonB(PROJ_OpenWDBtn, oWDBX, 10, "Videos349 Directory", "#fff", "#56845A", "#8FC18B")
+	wDBRS := theCtx.drawButtonB(PROJ_OpenWDBtn, oWDBX, 10, "Open Folder", "#fff", "#56845A", "#56845A")
+	lS3X, _ := nextHorizontalCoords(wDBRS, 20)
+	theCtx.drawButtonB(PROJ_LaunchS349, lS3X, 10, "V349 Slides", "#fff", "#56845A", "#8FC18B")
 
 	// second row border
 	_, borderY := nextVerticalCoords(pnIRect, 10)
@@ -116,6 +119,10 @@ func fVMouseCB(window *glfw.Window, button glfw.MouseButton, action glfw.Action,
 	case PROJ_OpenWDBtn:
 		rootPath, _ := GetRootPath()
 		ExternalLaunch(rootPath)
+
+	case PROJ_LaunchS349:
+		cmd := exec.Command("videos349.slides349")
+		cmd.Start()
 	}
 
 	if widgetCode > 1000 && widgetCode < 2000 {
