@@ -196,3 +196,15 @@ func TotalVideoLength() string {
 
 	return SecondsToTimeFormat(seconds)
 }
+
+
+func GetS349Command() string {
+	var cmdPath string
+	begin := os.Getenv("SNAP")
+	cmdPath = "slides349"
+	if begin != "" && !strings.HasPrefix(begin, "/snap/go/") {
+		cmdPath = filepath.Join(begin, "bin", "slides349")
+	}
+
+	return cmdPath
+}

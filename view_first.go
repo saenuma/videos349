@@ -121,7 +121,8 @@ func fVMouseCB(window *glfw.Window, button glfw.MouseButton, action glfw.Action,
 		ExternalLaunch(rootPath)
 
 	case PROJ_LaunchS349:
-		cmd := exec.Command("videos349.slides349")
+		cmdPath := GetS349Command()
+		cmd := exec.Command(cmdPath)
 		cmd.Start()
 	}
 
