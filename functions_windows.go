@@ -22,6 +22,13 @@ func GetFFPCommand() string {
 	return cmdPath
 }
 
+func GetS349Command() string {
+	execPath, _ := os.Executable()
+	cmdPath := filepath.Join(filepath.Dir(execPath), "slides349.exe")
+
+	return cmdPath
+}
+
 func PickVideoFile() string {
 	filename, err := dialog.File().Filter("MP4 Video", "mp4").Filter("WEBM Video", "webm").Filter("MKV Video", "mkv").Load()
 	if filename == "" || err != nil {
