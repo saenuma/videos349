@@ -62,10 +62,10 @@ func drawItemsView(window *glfw.Window, page int) {
 
 		eBtnId := 4000 + (i + 1)
 		editBtnX := currentX + int(kStrW) + 50
-		eDBRect := theCtx.drawButtonC(eBtnId, editBtnX, currentY, "#7A4F75")
+		eDBRect := theCtx.drawButtonB(eBtnId, editBtnX, currentY, "e", "#fff", "#7A4F75")
 		delBtnX := nextX(eDBRect, 10)
 		delBtnId := 5000 + (i + 1)
-		theCtx.drawButtonC(delBtnId, delBtnX, currentY, "#7A4F75")
+		theCtx.drawButtonB(delBtnId, delBtnX, currentY, "x", "#fff", "#7A4F75")
 
 		vBtnW := 0
 		if instr["kind"] == "image" {

@@ -37,9 +37,9 @@ func drawViewAIS(window *glfw.Window, currentFrame image.Image) {
 	theCtx.ggCtx.DrawString("Add Image + Sound Configuration", float64(dialogOriginX)+20, float64(dialogOriginY)+20+20)
 
 	addBtnOriginX := dialogWidth + dialogOriginX - 160
-	addBtnRect := theCtx.drawButtonA(VAIS_AddBtn, addBtnOriginX, dialogOriginY+20, "Add", "#fff", "#56845A")
+	addBtnRect := theCtx.drawButtonA(VAIS_AddBtn, addBtnOriginX, dialogOriginY+20, "Add", fontColor, "#D5B5D2")
 	closeBtnX := nextX(addBtnRect, 10)
-	theCtx.drawButtonA(VAIS_CloseBtn, closeBtnX, addBtnRect.OriginY, "Close", "#fff", "#B75F5F")
+	theCtx.drawButtonA(VAIS_CloseBtn, closeBtnX, addBtnRect.OriginY, "Close", fontColor, "#D5B5D2")
 
 	// file pickers
 	placeholder := "[click to pick an image]"

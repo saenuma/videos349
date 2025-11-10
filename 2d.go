@@ -68,6 +68,24 @@ func (ctx *Ctx) drawButtonA(btnId, originX, originY int, text, textColor, bgColo
 	return btnARect
 }
 
+func (ctx *Ctx) drawButtonB(btnId, originX, originY int, text, textColor, bgColor string) g143.Rect {
+	// draw bounding rect
+	textW, textH := ctx.ggCtx.MeasureString(text)
+	width, height := textW+10, textH+10
+	ctx.ggCtx.SetHexColor(bgColor)
+	ctx.ggCtx.DrawRectangle(float64(originX), float64(originY), float64(width), float64(height))
+	ctx.ggCtx.Fill()
+
+	// draw text
+	ctx.ggCtx.SetHexColor(textColor)
+	ctx.ggCtx.DrawString(text, float64(originX)+5, float64(originY)+FontSize)
+
+	// save dimensions
+	btnARect := g143.NewRect(originX, originY, int(width), int(height))
+	(*ctx.ObjCoords)[btnId] = btnARect
+	return btnARect
+}
+
 func (ctx *Ctx) drawButtonC(btnId, originX, originY int, bgColor string) g143.Rect {
 	// draw bounding rect
 	width, height := FontSize, FontSize
@@ -105,7 +123,7 @@ func (ctx *Ctx) drawInput(inputId, originX, originY, inputWidth int, placeholder
 }
 
 func (ctx *Ctx) drawFileInput(inputId, originX, originY, inputWidth int, placeholder string) g143.Rect {
-	ctx.ggCtx.SetHexColor("#eee")
+	ctx.ggCtx.SetHexColor("#F8F0F8")
 	ctx.ggCtx.DrawRectangle(float64(originX), float64(originY), float64(inputWidth), 30)
 	ctx.ggCtx.Fill()
 
