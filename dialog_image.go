@@ -37,7 +37,7 @@ func drawViewAddImage(window *glfw.Window, currentFrame image.Image) {
 
 	addBtnOriginX := dialogWidth + dialogOriginX - 160
 	addBtnRect := theCtx.drawButtonA(VAI_AddBtn, addBtnOriginX, dialogOriginY+20, "Add", "#fff", "#56845A")
-	closeBtnX, _ := nextHorizontalCoords(addBtnRect, 10)
+	closeBtnX := nextX(addBtnRect, 10)
 	theCtx.drawButtonA(VAI_CloseBtn, closeBtnX, addBtnRect.OriginY, "Close", "#fff", "#B75F5F")
 
 	placeholder := "[click to pick an image]"
@@ -48,7 +48,7 @@ func drawViewAddImage(window *glfw.Window, currentFrame image.Image) {
 		placeholder = displayFilename
 	}
 	pHRect := theCtx.drawFileInput(VAI_SelectImg, dialogOriginX+20, dialogOriginY+40+30, dialogWidth-40, placeholder)
-	_, durLabelY := nextVerticalCoords(pHRect, 30)
+	durLabelY := nextY(pHRect, 30)
 	durLabel := "duration (in seconds)"
 	durLabelW, _ := theCtx.ggCtx.MeasureString(durLabel)
 	theCtx.ggCtx.SetHexColor("#444")

@@ -23,25 +23,20 @@ func drawItemsView(window *glfw.Window, page int) {
 	theCtx := New2dCtx(wWidth, wHeight, &ObjCoords)
 
 	// draw top buttons
-	bBRect := theCtx.drawButtonB(BackBtn, 50, 10, "Back", "#fff", "#845B5B", "#845B5B")
-	aIBX, aIBY := nextHorizontalCoords(bBRect, 40)
-	aIBRect := theCtx.drawButtonB(AddImgBtn, aIBX, aIBY, "Add Image", "#fff", "#5C909C", "#286775")
-	aISX, aISY := nextHorizontalCoords(aIBRect, 10)
-	aIBSRect := theCtx.drawButtonB(AddImgSoundBtn, aISX, aISY, "Add Image + Audio", "#fff", "#5C909C", "#286775")
-	aVBX, aVBY := nextHorizontalCoords(aIBSRect, 10)
-	aVBRect := theCtx.drawButtonB(AddVidBtn, aVBX, aVBY, "Add Video", "#fff", "#81577F", "#633260")
-	rBX, rBY := nextHorizontalCoords(aVBRect, 10)
-	theCtx.drawButtonB(RenderBtn, rBX, rBY, "Render", "#fff", "#B19644", "#DECC6E")
-
-	// draw end of topbar demarcation
-	_, demarcY := nextVerticalCoords(aVBRect, 10)
-	theCtx.ggCtx.SetHexColor("#aaa")
-	theCtx.ggCtx.DrawRectangle(10, float64(demarcY), float64(wWidth)-20, 3)
-	theCtx.ggCtx.Fill()
+	bBRect := theCtx.drawButtonA(BackBtn, 50, 10, "Back", fontColor, "#D5B5D2")
+	aIBX := nextX(bBRect, 120)
+	aIBRect := theCtx.drawButtonA(AddImgBtn, aIBX, 10, "Add Image", fontColor, "#D5B5D2")
+	aISX := nextX(aIBRect, 10)
+	aIBSRect := theCtx.drawButtonA(AddImgSoundBtn, aISX, 10, "Add Image + Audio", fontColor, "#D5B5D2")
+	aVBX := nextX(aIBSRect, 10)
+	aVBRect := theCtx.drawButtonA(AddVidBtn, aVBX, 10, "Add Video", fontColor, "#D5B5D2")
+	rBX := nextX(aVBRect, 120)
+	theCtx.drawButtonA(RenderBtn, rBX, 10, "Render", fontColor, "#D5B5D2")
 
 	// show instructions
-	currentY := demarcY + 10
 	currentX := 10
+	currentY := nextY(aVBRect, 30)
+
 	shortInstrs := GetPageInstructions(page)
 	for j, instr := range shortInstrs {
 		// for i, instr := range Instructions {
@@ -49,13 +44,13 @@ func drawItemsView(window *glfw.Window, page int) {
 
 		// inbetween buttons
 		iAIBtnId := 6000 + (i + 1)
-		iAIBtnRect := theCtx.drawButtonC(iAIBtnId, currentX, currentY+20, "#5C909C")
-		_, iAISBtnY := nextVerticalCoords(iAIBtnRect, 10)
+		iAIBtnRect := theCtx.drawButtonC(iAIBtnId, currentX, currentY+20, "#7A4F75")
+		iAISBtnY := nextY(iAIBtnRect, 10)
 		iAISBtnId := 7000 + (i + 1)
-		iAISBtnRect := theCtx.drawButtonC(iAISBtnId, currentX, iAISBtnY, "#5C909C")
+		iAISBtnRect := theCtx.drawButtonC(iAISBtnId, currentX, iAISBtnY, "#7A4F75")
 		iAVBtnId := 8000 + (i + 1)
-		_, iAVBtnY := nextVerticalCoords(iAISBtnRect, 10)
-		theCtx.drawButtonC(iAVBtnId, currentX, iAVBtnY, "#81577F")
+		iAVBtnY := nextY(iAISBtnRect, 10)
+		theCtx.drawButtonC(iAVBtnId, currentX, iAVBtnY, "#7A4F75")
 
 		currentX += 40
 
@@ -67,18 +62,18 @@ func drawItemsView(window *glfw.Window, page int) {
 
 		eBtnId := 4000 + (i + 1)
 		editBtnX := currentX + int(kStrW) + 50
-		eDBRect := theCtx.drawButtonC(eBtnId, editBtnX, currentY, "#5A8A5E")
-		delBtnX, _ := nextHorizontalCoords(eDBRect, 10)
+		eDBRect := theCtx.drawButtonC(eBtnId, editBtnX, currentY, "#7A4F75")
+		delBtnX := nextX(eDBRect, 10)
 		delBtnId := 5000 + (i + 1)
-		theCtx.drawButtonC(delBtnId, delBtnX, currentY, "#A84E4E")
+		theCtx.drawButtonC(delBtnId, delBtnX, currentY, "#7A4F75")
 
 		vBtnW := 0
 		if instr["kind"] == "image" {
 			viaStr := "View Image Asset #" + strconv.Itoa(i+1)
 			vBtnId := 1000 + (i + 1)
-			vBtnRect := theCtx.drawButtonA(vBtnId, currentX, currentY+30, viaStr, "#fff", "#5F699F")
+			vBtnRect := theCtx.drawButtonA(vBtnId, currentX, currentY+30, viaStr, fontColor, "#D5B5D2")
 			vBtnW = vBtnRect.Width
-			_, durStrY := nextVerticalCoords(vBtnRect, 5)
+			durStrY := nextY(vBtnRect, 5)
 			// duration
 			var durStr string
 			if _, ok := instr["audio"]; ok {
@@ -95,13 +90,13 @@ func drawItemsView(window *glfw.Window, page int) {
 				vaaBtnId := 2000 + (i + 1)
 				vaaStr := "View Audio Asset #" + strconv.Itoa(i+1)
 				vaaY := durStrY + FontSize + 10
-				theCtx.drawButtonA(vaaBtnId, currentX, vaaY, vaaStr, "#fff", "#74A299")
+				theCtx.drawButtonA(vaaBtnId, currentX, vaaY, vaaStr, fontColor, "#D5B5D2")
 			}
 
 		} else if instr["kind"] == "video" {
 			viaStr := "View Video Asset #" + strconv.Itoa(i+1)
 			vVBtnId := 3000 + (i + 1)
-			vVBtnRect := theCtx.drawButtonA(vVBtnId, currentX, currentY+30, viaStr, "#fff", "#5F699F")
+			vVBtnRect := theCtx.drawButtonA(vVBtnId, currentX, currentY+30, viaStr, fontColor, "#D5B5D2")
 			vBtnW = vVBtnRect.Width
 
 			// duration
@@ -115,7 +110,7 @@ func drawItemsView(window *glfw.Window, page int) {
 			currentY += 160
 			currentX = 20
 		} else {
-			currentX += vBtnW + 20
+			currentX += vBtnW + 40
 		}
 	}
 

@@ -16,27 +16,18 @@ func drawFirstView(window *glfw.Window) {
 
 	theCtx := New2dCtx(wWidth, wHeight, &ProjObjCoords)
 
-	fontPath := GetDefaultFontPath()
-	theCtx.ggCtx.LoadFontFace(fontPath, 30)
-
-	theCtx.ggCtx.SetHexColor(fontColor)
-	theCtx.ggCtx.DrawString("New Project", 20, 10+30)
-
-	theCtx.ggCtx.LoadFontFace(fontPath, 20)
-	pnIRect := theCtx.drawInput(PROJ_NameInput, 20, 60, 420, "enter project name", false)
-	pnBtnX, pnBtnY := nextHorizontalCoords(pnIRect, 30)
-	nPRS := theCtx.drawButtonA(PROJ_NewProject, pnBtnX, pnBtnY, "New Project", fontColor, "#B3AE97")
-	oWDBX, _ := nextHorizontalCoords(nPRS, 40)
-	wDBRS := theCtx.drawButtonB(PROJ_OpenWDBtn, oWDBX, 10, "Open Folder", "#fff", "#56845A", "#56845A")
-	lS3X, _ := nextHorizontalCoords(wDBRS, 20)
-	theCtx.drawButtonB(PROJ_LaunchS349, lS3X, 10, "V349 Slides", "#fff", "#56845A", "#8FC18B")
+	pnIRect := theCtx.drawInput(PROJ_NameInput, 30, 20, 420, "enter project name", false)
+	pnBtnX := nextX(pnIRect, 30)
+	nPRS := theCtx.drawButtonA(PROJ_NewProject, pnBtnX, 20, "New Project", fontColor, "#D5B5D2")
+	oWDBX := nextX(nPRS, 140)
+	wDBRS := theCtx.drawButtonA(PROJ_OpenWDBtn, oWDBX, 20, "Open Folder", fontColor, "#D5B5D2")
+	lS3X := nextX(wDBRS, 10)
+	theCtx.drawButtonA(PROJ_LaunchS349, lS3X, 20, "V349 Slides", fontColor, "#D5B5D2")
 
 	// second row border
-	_, borderY := nextVerticalCoords(pnIRect, 10)
-	theCtx.ggCtx.SetHexColor("#999")
-	theCtx.ggCtx.DrawRoundedRectangle(10, float64(borderY), float64(wWidth)-20, 2, 2)
-	theCtx.ggCtx.Fill()
+	borderY := nextY(pnIRect, 30)
 
+	fontPath := GetDefaultFontPath()
 	theCtx.ggCtx.LoadFontFace(fontPath, 30)
 	theCtx.ggCtx.SetHexColor(fontColor)
 	theCtx.ggCtx.DrawString("Continue Projects", 20, float64(borderY)+12+30)
@@ -48,7 +39,7 @@ func drawFirstView(window *glfw.Window) {
 	for i, pf := range projectFiles {
 
 		btnId := 1000 + (i + 1)
-		pfRect := theCtx.drawButtonA(btnId, currentX, currentY, pf.Name, "#fff", "#5F699F")
+		pfRect := theCtx.drawButtonA(btnId, currentX, currentY, pf.Name, "#fff", "#744A6F")
 
 		newX := currentX + pfRect.Width + 10
 		if newX > (wWidth - pfRect.Width) {

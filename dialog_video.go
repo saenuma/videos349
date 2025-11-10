@@ -39,7 +39,7 @@ func drawViewAddVideo(window *glfw.Window, currentFrame image.Image) {
 
 	addBtnOriginX := dialogWidth + dialogOriginX - 160
 	addBtnRect := theCtx.drawButtonA(VAV_AddBtn, addBtnOriginX, dialogOriginY+20, "Add", "#fff", "#56845A")
-	closeBtnX, _ := nextHorizontalCoords(addBtnRect, 10)
+	closeBtnX := nextX(addBtnRect, 10)
 	theCtx.drawButtonA(VAV_CloseBtn, closeBtnX, addBtnRect.OriginY, "Close", "#fff", "#B75F5F")
 
 	// pick video
@@ -56,7 +56,7 @@ func drawViewAddVideo(window *glfw.Window, currentFrame image.Image) {
 	beginStr := "begin (mm:ss)"
 	beginStrW, _ := theCtx.ggCtx.MeasureString(beginStr)
 	beginStrX := dialogOriginX + 40
-	_, beginStrY := nextVerticalCoords(vFIRect, 20)
+	beginStrY := nextY(vFIRect, 20)
 	theCtx.ggCtx.DrawString(beginStr, float64(beginStrX), float64(beginStrY)+FontSize)
 	bIX := dialogOriginX + 40 + int(beginStrW) + 20
 	value := "0:00"
@@ -66,7 +66,7 @@ func drawViewAddVideo(window *glfw.Window, currentFrame image.Image) {
 	bIRect := theCtx.drawInput(VAV_BeginInput, bIX, beginStrY, 80, value, true)
 
 	// end str label and input
-	_, endStrY := nextVerticalCoords(bIRect, 20)
+	endStrY := nextY(bIRect, 20)
 	endStr := "end (mm:ss)"
 	endStrW, _ := theCtx.ggCtx.MeasureString(endStr)
 	endStrX := dialogOriginX + 40
@@ -83,7 +83,7 @@ func drawViewAddVideo(window *glfw.Window, currentFrame image.Image) {
 	suL := "speed up video"
 	suLW, _ := theCtx.ggCtx.MeasureString(suL)
 	sulX := dialogOriginX + 40
-	_, sULY := nextVerticalCoords(eIRect, 20)
+	sULY := nextY(eIRect, 20)
 	theCtx.ggCtx.DrawString(suL, float64(sulX), float64(sULY)+FontSize)
 	isSelected := false
 	if IsUpdateDialog && strings.ToLower(Instructions[ToUpdateInstrNum]["speedup"]) == "true" {
@@ -96,7 +96,7 @@ func drawViewAddVideo(window *glfw.Window, currentFrame image.Image) {
 	theCtx.ggCtx.SetHexColor("#444")
 	bwL := "black and white video"
 	bwLW, _ := theCtx.ggCtx.MeasureString(bwL)
-	bWLX, _ := nextHorizontalCoords(sURect, 40)
+	bWLX := nextX(sURect, 40)
 	theCtx.ggCtx.DrawString(bwL, float64(bWLX), float64(sURect.OriginY)+FontSize)
 	bWCX := bWLX + int(bwLW) + 30
 	isSelected2 := false

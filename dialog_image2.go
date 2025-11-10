@@ -38,7 +38,7 @@ func drawViewAIS(window *glfw.Window, currentFrame image.Image) {
 
 	addBtnOriginX := dialogWidth + dialogOriginX - 160
 	addBtnRect := theCtx.drawButtonA(VAIS_AddBtn, addBtnOriginX, dialogOriginY+20, "Add", "#fff", "#56845A")
-	closeBtnX, _ := nextHorizontalCoords(addBtnRect, 10)
+	closeBtnX := nextX(addBtnRect, 10)
 	theCtx.drawButtonA(VAIS_CloseBtn, closeBtnX, addBtnRect.OriginY, "Close", "#fff", "#B75F5F")
 
 	// file pickers
@@ -51,7 +51,7 @@ func drawViewAIS(window *glfw.Window, currentFrame image.Image) {
 	}
 	pHRect := theCtx.drawFileInput(VAIS_SelectImg, dialogOriginX+20, dialogOriginY+40+30, dialogWidth-40, placeholder)
 
-	_, audioBtnY := nextVerticalCoords(pHRect, 20)
+	audioBtnY := nextY(pHRect, 20)
 
 	placeholder2 := "[click to pick audio]"
 	if IsUpdateDialog {
@@ -63,7 +63,7 @@ func drawViewAIS(window *glfw.Window, currentFrame image.Image) {
 	aPHRect := theCtx.drawFileInput(VAIS_SelectAudio, dialogOriginX+20, audioBtnY, dialogWidth-40, placeholder2)
 
 	// audio begin
-	_, audioBeginY := nextVerticalCoords(aPHRect, 30)
+	audioBeginY := nextY(aPHRect, 30)
 	aBL := "audio begin (mm:ss)"
 	theCtx.ggCtx.SetHexColor("#444")
 	aBLW, _ := theCtx.ggCtx.MeasureString(aBL)
@@ -78,7 +78,7 @@ func drawViewAIS(window *glfw.Window, currentFrame image.Image) {
 	// audio end
 	aEL := "audio end (mm:ss)"
 	aELW, _ := theCtx.ggCtx.MeasureString(aEL)
-	_, aELY := nextVerticalCoords(aBRect, 30)
+	aELY := nextY(aBRect, 30)
 	theCtx.ggCtx.SetHexColor("#444")
 	theCtx.ggCtx.DrawString(aEL, float64(dialogOriginX)+40, float64(aELY))
 	aEIX := dialogOriginX + 40 + int(aELW) + 30
