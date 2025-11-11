@@ -25,7 +25,7 @@ func drawItemsView(window *glfw.Window, page int) {
 	theCtx.setFontSize(25)
 
 	// draw top buttons
-	bBRect := theCtx.drawButtonA(BackBtn, 50, 10, "Back", "#fff", "#693E68")
+	bBRect := theCtx.drawButtonA(BackBtn, 50, 10, "Back", fontColor, "#D5B5D2")
 	aIBX := nextX(bBRect, 120)
 	aIBRect := theCtx.drawButtonA(AddImgBtn, aIBX, 10, "Add Image", "#fff", "#693E68")
 	aISX := nextX(aIBRect, 10)
@@ -33,7 +33,7 @@ func drawItemsView(window *glfw.Window, page int) {
 	aVBX := nextX(aIBSRect, 10)
 	aVBRect := theCtx.drawButtonA(AddVidBtn, aVBX, 10, "Add Video", "#fff", "#693E68")
 	rBX := nextX(aVBRect, 120)
-	theCtx.drawButtonA(RenderBtn, rBX, 10, "Render", "#fff", "#693E68")
+	theCtx.drawButtonA(RenderBtn, rBX, 10, "Render", fontColor, "#D5B5D2")
 
 	theCtx.setFontSize(20)
 
