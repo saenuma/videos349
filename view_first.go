@@ -16,13 +16,15 @@ func drawFirstView(window *glfw.Window) {
 
 	theCtx := New2dCtx(wWidth, wHeight, &ProjObjCoords)
 
+	theCtx.setFontSize(25)
 	pnIRect := theCtx.drawInput(PROJ_NameInput, 30, 20, 420, "enter project name", false)
 	pnBtnX := nextX(pnIRect, 30)
 	nPRS := theCtx.drawButtonA(PROJ_NewProject, pnBtnX, 20, "New Project", fontColor, "#D5B5D2")
 	oWDBX := nextX(nPRS, 140)
-	wDBRS := theCtx.drawButtonA(PROJ_OpenWDBtn, oWDBX, 20, "Open Folder", fontColor, "#D5B5D2")
+	wDBRS := theCtx.drawButtonA(PROJ_OpenWDBtn, oWDBX, 20, "Open Folder", "#fff", "#693E68")
 	lS3X := nextX(wDBRS, 10)
-	theCtx.drawButtonA(PROJ_LaunchS349, lS3X, 20, "V349 Slides", fontColor, "#D5B5D2")
+	theCtx.drawButtonA(PROJ_LaunchS349, lS3X, 20, "V349 Slides", "#fff", "#693E68")
+	theCtx.setFontSize(20)
 
 	// second row border
 	borderY := nextY(pnIRect, 30)
@@ -172,6 +174,7 @@ func fVKeyCB(window *glfw.Window, key glfw.Key, scancode int, action glfw.Action
 
 	nIRS := ProjObjCoords[PROJ_NameInput]
 	theCtx := Continue2dCtx(CurrentWindowFrame, &ProjObjCoords)
+	theCtx.setFontSize(25)
 	theCtx.drawInput(PROJ_NameInput, nIRS.OriginX, nIRS.OriginY, nIRS.Width, NameInputEnteredTxt, true)
 
 	// send the frame to glfw window

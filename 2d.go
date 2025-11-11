@@ -114,7 +114,7 @@ func (ctx *Ctx) drawButtonC(btnId, originX, originY int, bgColor string) g143.Re
 }
 
 func (ctx *Ctx) drawInput(inputId, originX, originY, inputWidth int, placeholder string, isDefault bool) g143.Rect {
-	height := 30
+	height := float64(ctx.CurrentFontSize) * 1.8
 	ctx.ggCtx.SetHexColor(fontColor)
 	ctx.ggCtx.DrawRectangle(float64(originX), float64(originY), float64(inputWidth), float64(height))
 	ctx.ggCtx.Fill()
@@ -123,15 +123,17 @@ func (ctx *Ctx) drawInput(inputId, originX, originY, inputWidth int, placeholder
 	ctx.ggCtx.DrawRectangle(float64(originX)+2, float64(originY)+2, float64(inputWidth)-4, float64(height)-4)
 	ctx.ggCtx.Fill()
 
-	entryRect := g143.Rect{Width: inputWidth, Height: height, OriginX: originX, OriginY: originY}
+	entryRect := g143.Rect{Width: inputWidth, Height: int(height), OriginX: originX, OriginY: originY}
 	(*ctx.ObjCoords)[inputId] = entryRect
 
 	if isDefault {
 		ctx.ggCtx.SetHexColor("#444")
-		ctx.ggCtx.DrawString(placeholder, float64(originX+15), float64(originY)+FontSize)
+		ctx.ggCtx.DrawString(placeholder, float64(originX+ctx.CurrentFontSize/3),
+			float64(originY+ctx.CurrentFontSize/5)+float64(ctx.CurrentFontSize))
 	} else {
 		ctx.ggCtx.SetHexColor("#aaa")
-		ctx.ggCtx.DrawString(placeholder, float64(originX+15), float64(originY)+FontSize)
+		ctx.ggCtx.DrawString(placeholder, float64(originX+ctx.CurrentFontSize/3),
+			float64(originY+ctx.CurrentFontSize/5)+float64(ctx.CurrentFontSize))
 	}
 	return entryRect
 }
